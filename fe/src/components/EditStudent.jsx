@@ -8,7 +8,7 @@ function EditStudent() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/students/${id}`)
+    axios.get(`https://student-management-system-0432.onrender.com/students/${id}`)
       .then(res => setForm(res.data))
       .catch(err => alert('Error fetching student data'));
   }, [id]);
@@ -19,7 +19,7 @@ function EditStudent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:5000/students/${id}`, form)
+    axios.put(`https://student-management-system-0432.onrender.com/students/${id}`, form)
       .then(() => navigate('/'))
       .catch(err => alert('Error updating student'));
   };
