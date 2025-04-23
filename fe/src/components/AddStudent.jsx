@@ -12,7 +12,7 @@ function AddStudent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/students', form)
+    axios.post('https://student-management-system-0432.onrender.com/students', form)
       .then(() => navigate('/'))
       .catch(err => alert('Error adding student'));
   };
