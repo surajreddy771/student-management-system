@@ -12,7 +12,7 @@ function StudentList() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`https://student-management-system-0432.onrender.com/students`)
+    axios.delete(`https://student-management-system-0432.onrender.com/students/${id}`)
       .then(() => setStudents(students.filter(s => s._id !== id)))
       .catch(err => alert('Error deleting student'));
   };
