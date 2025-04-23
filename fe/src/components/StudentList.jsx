@@ -6,7 +6,7 @@ function StudentList() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/students')
+    axios.get('https://student-management-system-0432.onrender.com/students')
       .then(res => setStudents(res.data))
       .catch(err => alert('Error fetching students'));
   }, []);
