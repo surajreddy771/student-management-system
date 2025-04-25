@@ -1,3 +1,4 @@
+// EditStudent.jsx
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -24,6 +25,17 @@ function EditStudent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const currentYear = new Date().getFullYear();
+    const { studentId, firstName, lastName, email, dob, department, enrollmentYear } = form;
+
+    if (!studentId.match(/^[a-zA-Z0-9]+$/)) return toast.error("Student ID must be alphanumeric.");
+    if (firstName.length < 2) return toast.error("First name must be at least 2 characters.");
+    if (lastName.length < 2) return toast.error("Last name must be at least 2 characters.");
+    if (!email.match(/^\S+@\S+\.\S+$/)) return toast.error("Invalid email format.");
+    if (!dob) return toast.error("Date of Birth is required.");
+    if (!department) return toast.error("Department is required.");
+    if (enrollmentYear < 2000 || enrollmentYear > currentYear) return toast.error("Enrollment year must be between 2000 and current year.");
+
     axios.put(`${process.env.REACT_APP_API_BASE}/students/${id}`, form)
       .then(() => {
         toast.success('Student updated');
