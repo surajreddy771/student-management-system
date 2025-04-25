@@ -6,15 +6,15 @@ function StudentList() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    axios.get('https://student-management-system-0432.onrender.com/students')
+    axios.get(`${process.env.REACT_APP_API_BASE}/students`)
       .then(res => setStudents(res.data))
-      .catch(err => alert('Error fetching students'));
+      .catch(() => alert('Error fetching students'));
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`https://student-management-system-0432.onrender.com/students/${id}`)
+    axios.delete(`${process.env.REACT_APP_API_BASE}/students/${id}`)
       .then(() => setStudents(students.filter(s => s._id !== id)))
-      .catch(err => alert('Error deleting student'));
+      .catch(() => alert('Error deleting student'));
   };
 
   return (
@@ -26,18 +26,14 @@ function StudentList() {
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Course</th>
-            <th>Year</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {students.map(student => (
             <tr key={student._id}>
-              <td>{student.name}</td>
+              <td>{student.firstName} {student.lastName}</td>
               <td>{student.email}</td>
-              <td>{student.course}</td>
-              <td>{student.year}</td>
               <td>
                 <Link to={`/edit/${student._id}`}>Edit</Link>
                 <button onClick={() => handleDelete(student._id)}>Delete</button>
@@ -51,3 +47,4 @@ function StudentList() {
 }
 
 export default StudentList;
+
