@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { TextField, Button, FormControlLabel, Checkbox, Typography, Stack } from '@mui/material';
+import { toast } from 'react-toastify';
 
 function AddStudent() {
   const [form, setForm] = useState({
@@ -16,24 +18,30 @@ function AddStudent() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post(`${process.env.REACT_APP_API_BASE}/students`, form)
-      .then(() => navigate('/students'))
-      .catch(() => alert('Error adding student'));
+      .then(() => {
+        toast.success('Student added');
+        navigate('/students');
+      })
+      .catch(() => toast.error('Error adding student'));
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Add Student</h2>
-      <input name="studentId" placeholder="Student ID" onChange={handleChange} required />
-      <input name="firstName" placeholder="First Name" onChange={handleChange} required />
-      <input name="lastName" placeholder="Last Name" onChange={handleChange} required />
-      <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
-      <input name="dob" type="date" placeholder="DOB" onChange={handleChange} required />
-      <input name="department" placeholder="Department" onChange={handleChange} required />
-      <input name="enrollmentYear" type="number" placeholder="Enrollment Year" onChange={handleChange} required />
-      <label>
-        <input name="isActive" type="checkbox" checked={form.isActive} onChange={handleChange} /> Is Active
-      </label>
-      <button type="submit">Add</button>
+      <Typography variant="h5" gutterBottom>Add Student</Typography>
+      <Stack spacing={2}>
+        <TextField name="studentId" label="Student ID" onChange={handleChange} required />
+        <TextField name="firstName" label="First Name" onChange={handleChange} required />
+        <TextField name="lastName" label="Last Name" onChange={handleChange} required />
+        <TextField name="email" type="email" label="Email" onChange={handleChange} required />
+        <TextField name="dob" type="date" label="Date of Birth" InputLabelProps={{ shrink: true }} onChange={handleChange} required />
+        <TextField name="department" label="Department" onChange={handleChange} required />
+        <TextField name="enrollmentYear" type="number" label="Enrollment Year" onChange={handleChange} required />
+        <FormControlLabel
+          control={<Checkbox name="isActive" checked={form.isActive} onChange={handleChange} />}
+          label="Is Active"
+        />
+        <Button type="submit" variant="contained">Add</Button>
+      </Stack>
     </form>
   );
 }
