@@ -2,9 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TextField, FormControlLabel, Checkbox, Stack } from "@mui/material";
-import MKButton from "components/MKButton.jsx";
-import MKTypography from "components/MKTypography.jsx";
-import MKCard from "components/MKCard.jsx";
+import MKButton from "../MKButton.jsx";
+import MKTypography from "../MKTypography.jsx";
+import MKCard from "../MKCard.jsx";
 import { toast } from "react-toastify";
 
 function AddStudent() {
