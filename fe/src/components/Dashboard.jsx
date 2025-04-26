@@ -9,7 +9,7 @@ import MKTypography from "./MKTypography.jsx";
 import MKCard from "./MKCard.jsx";
 import MKButton from "./MKButton.jsx";
 import StatsCard from "./StatsCard.jsx";
-import DonutChart from "./DonutChart.jsx";
+import DepartmentTable from "./DonutChart.jsx";
 import UpcomingPassedOut from "./UpcomingPassedOut.jsx";
 
 function Dashboard() {
@@ -32,10 +32,6 @@ function Dashboard() {
       {/* Welcome Card */}
       <MKCard sx={{ textAlign: "center", width: "100%", maxWidth: 600 }}>
         <MKTypography variant="h3" mb={2}>Welcome to Student Management System</MKTypography>
-        <Stack direction="row" spacing={2} justifyContent="center" mt={4}>
-          <MKButton onClick={() => navigate('/students')}>View Students</MKButton>
-          <MKButton color="secondary" onClick={() => navigate('/add')}>Add New Student</MKButton>
-        </Stack>
       </MKCard>
 
       {/* Quick Stats Cards */}
@@ -50,8 +46,9 @@ function Dashboard() {
           <StatsCard title="Departments" value={departments.length} />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <DonutChart students={students} />
-        </Grid>
+        <DepartmentTable students={students} />
+</Grid>
+
       </Grid>
 
       {/* Upcoming Passed Out Students */}
