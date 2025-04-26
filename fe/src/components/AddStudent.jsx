@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, FormControlLabel, Checkbox, Typography, Stack } from '@mui/material';
+import { TextField, Button, FormControlLabel, Checkbox, Typography, Grid } from '@mui/material';
 import { toast } from 'react-toastify';
 
 function AddStudent() {
@@ -62,80 +62,105 @@ function AddStudent() {
   return (
     <form onSubmit={handleSubmit}>
       <Typography variant="h5" gutterBottom>Add Student</Typography>
-      <Stack spacing={2}>
-        <TextField 
-          name="studentId" 
-          label="Student ID" 
-          value={form.studentId} 
-          onChange={handleChange} 
-          required 
-          error={!!errors.studentId} 
-          helperText={errors.studentId} 
-        />
-        <TextField 
-          name="firstName" 
-          label="First Name" 
-          value={form.firstName} 
-          onChange={handleChange} 
-          required 
-          error={!!errors.firstName} 
-          helperText={errors.firstName} 
-        />
-        <TextField 
-          name="lastName" 
-          label="Last Name" 
-          value={form.lastName} 
-          onChange={handleChange} 
-          required 
-          error={!!errors.lastName} 
-          helperText={errors.lastName} 
-        />
-        <TextField 
-          name="email" 
-          type="email" 
-          label="Email" 
-          value={form.email} 
-          onChange={handleChange} 
-          required 
-          error={!!errors.email} 
-          helperText={errors.email} 
-        />
-        <TextField 
-          name="dob" 
-          type="date" 
-          label="Date of Birth" 
-          InputLabelProps={{ shrink: true }} 
-          value={form.dob} 
-          onChange={handleChange} 
-          required 
-          error={!!errors.dob} 
-          helperText={errors.dob} 
-        />
-        <TextField 
-          name="department" 
-          label="Department" 
-          value={form.department} 
-          onChange={handleChange} 
-          required 
-          error={!!errors.department} 
-          helperText={errors.department} 
-        />
-        <TextField 
-          name="enrollmentYear" 
-          type="number" 
-          label="Enrollment Year" 
-          value={form.enrollmentYear} 
-          onChange={handleChange} 
-          required 
-          error={!!errors.enrollmentYear} 
-          helperText={errors.enrollmentYear} 
-        />
-        <FormControlLabel
-          control={<Checkbox name="isActive" checked={form.isActive} onChange={handleChange} />}
-          label="Is Active"
-        />
-        <Button type="submit" variant="contained">Add</Button>
-      </Stack>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <TextField 
+            name="studentId" 
+            label="Student ID" 
+            value={form.studentId} 
+            onChange={handleChange} 
+            required 
+            fullWidth
+            error={!!errors.studentId} 
+            helperText={errors.studentId} 
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField 
+            name="dob" 
+            type="date" 
+            label="Date of Birth" 
+            InputLabelProps={{ shrink: true }} 
+            value={form.dob} 
+            onChange={handleChange} 
+            required 
+            fullWidth
+            error={!!errors.dob} 
+            helperText={errors.dob} 
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField 
+            name="firstName" 
+            label="First Name" 
+            value={form.firstName} 
+            onChange={handleChange} 
+            required 
+            fullWidth
+            error={!!errors.firstName} 
+            helperText={errors.firstName} 
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField 
+            name="lastName" 
+            label="Last Name" 
+            value={form.lastName} 
+            onChange={handleChange} 
+            required 
+            fullWidth
+            error={!!errors.lastName} 
+            helperText={errors.lastName} 
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField 
+            name="department" 
+            label="Department" 
+            value={form.department} 
+            onChange={handleChange} 
+            required 
+            fullWidth
+            error={!!errors.department} 
+            helperText={errors.department} 
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField 
+            name="enrollmentYear" 
+            type="number" 
+            label="Enrollment Year" 
+            value={form.enrollmentYear} 
+            onChange={handleChange} 
+            required 
+            fullWidth
+            error={!!errors.enrollmentYear} 
+            helperText={errors.enrollmentYear} 
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField 
+            name="email" 
+            type="email" 
+            label="Email" 
+            value={form.email} 
+            onChange={handleChange} 
+            required 
+            fullWidth
+            error={!!errors.email} 
+            helperText={errors.email} 
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <FormControlLabel
+            control={<Checkbox name="isActive" checked={form.isActive} onChange={handleChange} />}
+            label="Currently Studying"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Button type="submit" variant="contained" fullWidth>Add</Button>
+        </Grid>
+      </Grid>
     </form>
   );
 }
