@@ -8,7 +8,7 @@ function Dashboard() {
   const [stats, setStats] = useState({
     totalStudents: 0,
     activeStudents: 0,
-    studentsByCourse: [],
+    studentsByDepartment: [],
     isLoading: true,
   });
 
@@ -17,12 +17,12 @@ function Dashboard() {
       try {
         const totalRes = await axios.get(`${process.env.REACT_APP_API_BASE}/students`);
         const activeRes = await axios.get(`${process.env.REACT_APP_API_BASE}/students/active`);
-        const coursesRes = await axios.get(`${process.env.REACT_APP_API_BASE}/students/courses`);
+        const departmentsRes = await axios.get(`${process.env.REACT_APP_API_BASE}/students/departments`);
         
         setStats({
           totalStudents: totalRes.data.length,
           activeStudents: activeRes.data.length,
-          studentsByCourse: coursesRes.data,
+          studentsByDepartment: departmentsRes.data,
           isLoading: false,
         });
       } catch (error) {
@@ -34,7 +34,7 @@ function Dashboard() {
   }, []);
 
   const renderPieChart = (data) => {
-    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF4C4C'];
     return (
       <ResponsiveContainer width="100%" height={200}>
         <PieChart>
@@ -70,7 +70,7 @@ function Dashboard() {
       <Container sx={{ mt: 4 }}>
         <Grid container spacing={3}>
           {/* Total Students Card */}
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <Card>
               <CardHeader title="Total Students" />
               <CardContent>
@@ -84,7 +84,7 @@ function Dashboard() {
           </Grid>
 
           {/* Active Students Card */}
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <Card>
               <CardHeader title="Active Students" />
               <CardContent>
@@ -97,31 +97,21 @@ function Dashboard() {
             </Card>
           </Grid>
 
-          {/* Students by Course Card */}
-          <Grid item xs={12} md={4}>
+          {/* Students by Department Card */}
+          <Grid item xs={12}>
             <Card>
-              <CardHeader title="Students by Course" />
+              <CardHeader title="Students by Department" />
               <CardContent>
                 {stats.isLoading ? (
                   <CircularProgress />
                 ) : (
-                  renderPieChart(stats.studentsByCourse)
+                  renderPieChart(stats.studentsByDepartment)
                 )}
               </CardContent>
             </Card>
           </Grid>
 
           {/* Additional statistics */}
-          {/* Example: Students by Department */}
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardHeader title="Students by Department" />
-              <CardContent>
-                {/* Render bar chart or other type of statistics here */}
-              </CardContent>
-            </Card>
-          </Grid>
-          
           {/* Example: Average Enrollment Year */}
           <Grid item xs={12} md={4}>
             <Card>
