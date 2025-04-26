@@ -11,7 +11,14 @@ function App() {
   return (
     <Router>
       <CssBaseline />
-      <ToastContainer />
+      <ToastContainer position="top-center"
+  autoClose={2000}   // 2 seconds
+  hideProgressBar={false}
+  newestOnTop={false}
+  closeOnClick
+  pauseOnFocusLoss
+  draggable
+  pauseOnHover />
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Routes>
           <Route path="/" element={<Dashboard />} />
