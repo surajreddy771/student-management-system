@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import AddStudent from './components/AddStudent';
-import EditStudent from './components/EditStudent';
 import StudentList from './components/StudentList';
+import EditStudent from './components/EditStudent';
 
 function App() {
   return (
