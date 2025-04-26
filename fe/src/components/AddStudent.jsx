@@ -11,6 +11,7 @@ function AddStudent() {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+  // Validation function
   const validate = (fields = form) => {
     const temp = {};
     if (!fields.studentId) temp.studentId = "Student ID is required";
@@ -26,16 +27,20 @@ function AddStudent() {
     return temp;
   };
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newForm = { ...form, [name]: type === 'checkbox' ? checked : value };
     setForm(newForm);
+
+    // Validate the input and set error messages
     setErrors({
       ...errors,
       [name]: validate({ ...form, [name]: type === 'checkbox' ? checked : value })[name]
     });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
@@ -43,6 +48,7 @@ function AddStudent() {
 
     if (Object.keys(validationErrors).length > 0) return;
 
+    // Make the API call to add a student
     axios.post(`${process.env.REACT_APP_API_BASE}/students`, form)
       .then(() => {
         toast.success('Student added');
@@ -57,13 +63,73 @@ function AddStudent() {
     <form onSubmit={handleSubmit}>
       <Typography variant="h5" gutterBottom>Add Student</Typography>
       <Stack spacing={2}>
-        <TextField name="studentId" label="Student ID" value={form.studentId} onChange={handleChange} required error={!!errors.studentId} helperText={errors.studentId} />
-        <TextField name="firstName" label="First Name" value={form.firstName} onChange={handleChange} required error={!!errors.firstName} helperText={errors.firstName} />
-        <TextField name="lastName" label="Last Name" value={form.lastName} onChange={handleChange} required error={!!errors.lastName} helperText={errors.lastName} />
-        <TextField name="email" type="email" label="Email" value={form.email} onChange={handleChange} required error={!!errors.email} helperText={errors.email} />
-        <TextField name="dob" type="date" label="Date of Birth" InputLabelProps={{ shrink: true }} value={form.dob} onChange={handleChange} required error={!!errors.dob} helperText={errors.dob} />
-        <TextField name="department" label="Department" value={form.department} onChange={handleChange} required error={!!errors.department} helperText={errors.department} />
-        <TextField name="enrollmentYear" type="number" label="Enrollment Year" value={form.enrollmentYear} onChange={handleChange} required error={!!errors.enrollmentYear} helperText={errors.enrollmentYear} />
+        <TextField 
+          name="studentId" 
+          label="Student ID" 
+          value={form.studentId} 
+          onChange={handleChange} 
+          required 
+          error={!!errors.studentId} 
+          helperText={errors.studentId} 
+        />
+        <TextField 
+          name="firstName" 
+          label="First Name" 
+          value={form.firstName} 
+          onChange={handleChange} 
+          required 
+          error={!!errors.firstName} 
+          helperText={errors.firstName} 
+        />
+        <TextField 
+          name="lastName" 
+          label="Last Name" 
+          value={form.lastName} 
+          onChange={handleChange} 
+          required 
+          error={!!errors.lastName} 
+          helperText={errors.lastName} 
+        />
+        <TextField 
+          name="email" 
+          type="email" 
+          label="Email" 
+          value={form.email} 
+          onChange={handleChange} 
+          required 
+          error={!!errors.email} 
+          helperText={errors.email} 
+        />
+        <TextField 
+          name="dob" 
+          type="date" 
+          label="Date of Birth" 
+          InputLabelProps={{ shrink: true }} 
+          value={form.dob} 
+          onChange={handleChange} 
+          required 
+          error={!!errors.dob} 
+          helperText={errors.dob} 
+        />
+        <TextField 
+          name="department" 
+          label="Department" 
+          value={form.department} 
+          onChange={handleChange} 
+          required 
+          error={!!errors.department} 
+          helperText={errors.department} 
+        />
+        <TextField 
+          name="enrollmentYear" 
+          type="number" 
+          label="Enrollment Year" 
+          value={form.enrollmentYear} 
+          onChange={handleChange} 
+          required 
+          error={!!errors.enrollmentYear} 
+          helperText={errors.enrollmentYear} 
+        />
         <FormControlLabel
           control={<Checkbox name="isActive" checked={form.isActive} onChange={handleChange} />}
           label="Is Active"
