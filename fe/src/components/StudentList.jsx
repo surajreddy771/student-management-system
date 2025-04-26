@@ -10,12 +10,14 @@ import { toast } from 'react-toastify';
 function StudentList() {
   const [students, setStudents] = useState([]);
 
+  // Fetch students on component mount
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_BASE}/students`)
       .then(res => setStudents(res.data))
       .catch(() => toast.error('Error fetching students'));
   }, []);
 
+  // Handle student deletion
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this student?')) {
       axios.delete(`${process.env.REACT_APP_API_BASE}/students/${id}`)
