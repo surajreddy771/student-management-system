@@ -6,6 +6,8 @@ import MKButton from "./MKButton.jsx";
 import MKTypography from "./MKTypography.jsx";
 import MKCard from "./MKCard.jsx";
 import { toast } from "react-toastify";
+import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@mui/material';
+
 
 function EditStudent() {
   const [form, setForm] = useState({
@@ -160,15 +162,31 @@ function EditStudent() {
             helperText={errors.dob}
             fullWidth
           />
-          <TextField
-            name="department"
-            label="Department"
-            value={form.department}
-            onChange={handleChange}
-            error={Boolean(errors.department)}
-            helperText={errors.department}
-            fullWidth
-          />
+          
+<FormControl fullWidth error={Boolean(errors.department)}>
+  <InputLabel id="department-label">Department</InputLabel>
+  <Select
+    labelId="department-label"
+    name="department"
+    value={form.department}
+    onChange={handleChange}
+    label="Department"
+  >
+    <MenuItem value="CSE">CSE</MenuItem>
+    <MenuItem value="CSM">CSM</MenuItem>
+    <MenuItem value="CSI">CSI</MenuItem>
+    <MenuItem value="IT">IT</MenuItem>
+    <MenuItem value="MECH">Mechanical</MenuItem>
+    <MenuItem value="BIOTEH">Bio Technology</MenuItem>
+    <MenuItem value="CIVIL">Civil</MenuItem>
+    <MenuItem value="ECE">ECE</MenuItem>
+    <MenuItem value="EEE">EEE</MenuItem>
+    <MenuItem value="CHEM">Chemical</MenuItem>
+
+  </Select>
+  {errors.department && <FormHelperText>{errors.department}</FormHelperText>}
+</FormControl>
+
           <TextField
   name="enrollmentYear"
   type="number"
