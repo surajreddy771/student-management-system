@@ -1,8 +1,8 @@
 // Dashboard.jsx
-import MKTypography from "../MKTypography.jsx";
-import MKCard from "../MKCard.jsx";
+import MKTypography from "./MKTypography.jsx";
+import MKCard from "./MKCard.jsx";
 import { Stack } from "@mui/material";
-import MKButton from "../MKButton.jsx";
+import MKButton from "./MKButton.jsx";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
