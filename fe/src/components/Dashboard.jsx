@@ -1,22 +1,61 @@
 // Dashboard.jsx
+import { useEffect, useState } from "react";
+import { Stack, Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 import MKTypography from "./MKTypography.jsx";
 import MKCard from "./MKCard.jsx";
-import { Stack } from "@mui/material";
 import MKButton from "./MKButton.jsx";
-import { useNavigate } from "react-router-dom";
+import StatsCard from "./StatsCard.jsx";
+import DonutChart from "./DonutChart.jsx";
+import UpcomingPassedOut from "./UpcomingPassedOut.jsx";
 
 function Dashboard() {
   const navigate = useNavigate();
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_BASE}/students`)
+      .then(res => setStudents(res.data))
+      .catch(() => toast.error("Failed to load students"));
+  }, []);
+
+  const totalStudents = students.length;
+  const activeStudents = students.filter(s => s.isActive).length;
+  const departments = [...new Set(students.map(s => s.department))];
 
   return (
-    <Stack alignItems="center" justifyContent="center" height="80vh">
-      <MKCard sx={{ textAlign: "center" }}>
-        <MKTypography variant="h3">Welcome to Student Management System</MKTypography>
+    <Stack spacing={6} alignItems="center" padding={4}>
+      
+      {/* Welcome Card */}
+      <MKCard sx={{ textAlign: "center", width: "100%", maxWidth: 600 }}>
+        <MKTypography variant="h3" mb={2}>Welcome to Student Management System</MKTypography>
         <Stack direction="row" spacing={2} justifyContent="center" mt={4}>
           <MKButton onClick={() => navigate('/students')}>View Students</MKButton>
           <MKButton color="secondary" onClick={() => navigate('/add')}>Add New Student</MKButton>
         </Stack>
       </MKCard>
+
+      {/* Quick Stats Cards */}
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={12} sm={6} md={3}>
+          <StatsCard title="Total Students" value={totalStudents} />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <StatsCard title="Active Students" value={activeStudents} />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <StatsCard title="Departments" value={departments.length} />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <DonutChart students={students} />
+        </Grid>
+      </Grid>
+
+      {/* Upcoming Passed Out Students */}
+      <UpcomingPassedOut students={students} />
     </Stack>
   );
 }
