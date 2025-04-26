@@ -6,6 +6,7 @@ import EditStudent from './components/EditStudent';
 import { Container, CssBaseline } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 function App() {
   return (
