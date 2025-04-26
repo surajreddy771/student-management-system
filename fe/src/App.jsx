@@ -1,22 +1,20 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import DashboardLayout from './components/layouts/DashboardLayout';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
-import StudentList from './components/StudentList';
 import AddStudent from './components/AddStudent';
 import EditStudent from './components/EditStudent';
+import StudentList from './components/StudentList';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/" element={<DashboardLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="students" element={<StudentList />} />
-          <Route path="add" element={<StudentForm />} />
-          <Route path="edit/:id" element={<StudentForm />} />
-        </Route>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/students" element={<StudentList />} />
+        <Route path="/add" element={<AddStudent />} />
+        <Route path="/edit/:id" element={<EditStudent />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
