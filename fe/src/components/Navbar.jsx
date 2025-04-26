@@ -7,7 +7,7 @@ function Navbar() {
 
   const navItems = [
     { label: "Dashboard", path: "/" },
-    { label: "Students", path: "/students" },
+    { label: "Students List", path: "/students" },
     { label: "Add Student", path: "/add" },
   ];
 
@@ -15,7 +15,7 @@ function Navbar() {
     <AppBar position="static" color="default" elevation={2}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Typography variant="h6" color="primary">
-          🎓 Student Management
+          🎓 Student Database Management System
         </Typography>
 
         <Stack direction="row" spacing={2}>

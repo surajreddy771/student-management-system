@@ -4,13 +4,13 @@ import { Stack, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-
 import MKTypography from "./MKTypography.jsx";
 import MKCard from "./MKCard.jsx";
 import MKButton from "./MKButton.jsx";
 import StatsCard from "./StatsCard.jsx";
-import DepartmentTable from "./DonutChart.jsx";
+import DepartmentTable from "./DonutChart.jsx";  // Changed the name for clarity
 import UpcomingPassedOut from "./UpcomingPassedOut.jsx";
+import UpcomingEnrolledThisYear from "./UpcomingEnrolledThisYear.jsx";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -28,12 +28,6 @@ function Dashboard() {
 
   return (
     <Stack spacing={6} alignItems="center" padding={4}>
-      
-      {/* Welcome Card */}
-      <MKCard sx={{ textAlign: "center", width: "100%", maxWidth: 600 }}>
-        <MKTypography variant="h3" mb={2}>Welcome to Student Management System</MKTypography>
-      </MKCard>
-
       {/* Quick Stats Cards */}
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12} sm={6} md={3}>
@@ -43,16 +37,15 @@ function Dashboard() {
           <StatsCard title="Active Students" value={activeStudents} />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <StatsCard title="Departments" value={departments.length} />
+          {/* Render Department Table */}
+          <DepartmentTable students={students} />
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-        <DepartmentTable students={students} />
-</Grid>
-
       </Grid>
 
       {/* Upcoming Passed Out Students */}
       <UpcomingPassedOut students={students} />
+      {/* Upcoming Enrolled Students This Year */}
+      <UpcomingEnrolledThisYear students={students} />
     </Stack>
   );
 }

@@ -3,23 +3,21 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import MKCard from "./MKCard.jsx";
 import MKTypography from "./MKTypography.jsx";
 
-function UpcomingPassedOut({ students }) {
-  const nextMonth = new Date();
-  nextMonth.setMonth(nextMonth.getMonth() + 1);
+function UpcomingEnrolledThisYear({ students }) {
+  const currentYear = new Date().getFullYear();
 
-  const passingStudents = useMemo(() => {
+  const enrolledThisYearStudents = useMemo(() => {
     return students.filter(student => {
       const enrollYear = parseInt(student.enrollmentYear);
       if (isNaN(enrollYear)) return false;
-      const passOutYear = enrollYear + 4;
-      return passOutYear === nextMonth.getFullYear();
+      return enrollYear === currentYear;
     });
   }, [students]);
 
   return (
     <MKCard sx={{ width: "100%", maxWidth: 800 }}>
       <MKTypography variant="h5" textAlign="center" mb={2}>
-        🎓 Students Passing Out This Year
+        📝 Students Enrolled This Year
       </MKTypography>
       <TableContainer component={Paper} elevation={0}>
         <Table>
@@ -32,14 +30,14 @@ function UpcomingPassedOut({ students }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {passingStudents.length === 0 ? (
+            {enrolledThisYearStudents.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={4} style={{ textAlign: "center" }}>
-                  No students passing out this year.
+                  No students enrolled this year.
                 </TableCell>
               </TableRow>
             ) : (
-              passingStudents.map((student, index) => (
+              enrolledThisYearStudents.map((student, index) => (
                 <TableRow key={index}>
                   <TableCell style={{ textAlign: "center" }}>{student.studentId}</TableCell>
                   <TableCell style={{ textAlign: "center" }}>{student.firstName}</TableCell>
@@ -55,4 +53,4 @@ function UpcomingPassedOut({ students }) {
   );
 }
 
-export default UpcomingPassedOut;
+export default UpcomingEnrolledThisYear;

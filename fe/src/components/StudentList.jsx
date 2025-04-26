@@ -29,7 +29,7 @@ function StudentList() {
   };
 
   return (
-    <MKCard>
+    <MKCard style={{ maxWidth: '1450px', margin: '2rem auto 2rem', display: 'block', padding: '2rem' }}>
       <MKTypography variant="h4">Student List</MKTypography>
       <MKButton onClick={() => navigate('/add')} color="primary" style={{ marginBottom: "1rem" }}>
         Add New Student
@@ -38,21 +38,26 @@ function StudentList() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Student ID</TableCell>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Actions</TableCell>
+              {['Student ID', 'First Name', 'Last Name', 'Email', 'Date of Birth', 'Department', 'Enrollment Year', 'Status', 'Actions'].map((header, idx) => (
+                <TableCell key={idx} style={{ textAlign: "center" }}>{header}</TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {students.map(student => (
               <TableRow key={student._id}>
-                <TableCell>{student.studentId}</TableCell>
-                <TableCell>{student.firstName}</TableCell>
-                <TableCell>{student.lastName}</TableCell>
-                <TableCell>{student.email}</TableCell>
-                <TableCell>
+                <TableCell style={{ textAlign: "center" }}>{student.studentId}</TableCell>
+                <TableCell style={{ textAlign: "center" }}>{student.firstName}</TableCell>
+                <TableCell style={{ textAlign: "center" }}>{student.lastName}</TableCell>
+                <TableCell style={{ textAlign: "center" }}>{student.email}</TableCell>
+                <TableCell style={{ textAlign: "center" }}>{student.dob?.substring(0, 10)}</TableCell>
+                <TableCell style={{ textAlign: "center" }}>{student.department}</TableCell>
+                <TableCell style={{ textAlign: "center" }}>{student.enrollmentYear}</TableCell>
+                <TableCell style={{ textAlign: "center" }}>
+  {student.isActive ? 'Active' : 'Inactive'}
+</TableCell>
+
+                <TableCell style={{ textAlign: "center" }}>
                   <MKButton size="small" color="primary" onClick={() => navigate(`/edit/${student._id}`)}>Edit</MKButton>
                   &nbsp;
                   <MKButton size="small" color="error" onClick={() => handleDelete(student._id)}>Delete</MKButton>

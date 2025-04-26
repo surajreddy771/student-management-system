@@ -24,15 +24,15 @@ function DepartmentTable({ students }) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell><strong>Department</strong></TableCell>
-              <TableCell><strong>Number of Students</strong></TableCell>
+              <TableCell style={{ textAlign: "center" }}><strong>Department</strong></TableCell>
+              <TableCell style={{ textAlign: "center" }}><strong>Number of Students</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.map((row, index) => (
               <TableRow key={index}>
-                <TableCell>{row.department}</TableCell>
-                <TableCell>{row.count}</TableCell>
+                <TableCell style={{ textAlign: "center" }}>{row.department}</TableCell>
+                <TableCell style={{ textAlign: "center" }}>{row.count}</TableCell>
               </TableRow>
             ))}
           </TableBody>
