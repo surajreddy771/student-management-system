@@ -1,18 +1,36 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
-import { Link } from 'react-router-dom';
+// src/components/Navbar.js
+import { AppBar, Toolbar, Typography, Button, Stack } from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
 
 function Navbar() {
+  const location = useLocation();
+
+  const navItems = [
+    { label: "Dashboard", path: "/" },
+    { label: "Students", path: "/students" },
+    { label: "Add Student", path: "/add" },
+  ];
+
   return (
-    <AppBar position="sticky">
-      <Toolbar>
-        <Container>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Student Management System
-          </Typography>
-          <Button color="inherit" component={Link} to="/students">Students</Button>
-          <Button color="inherit" component={Link} to="/add">Add Student</Button>
-        </Container>
+    <AppBar position="static" color="default" elevation={2}>
+      <Toolbar sx={{ justifyContent: "space-between" }}>
+        <Typography variant="h6" color="primary">
+          🎓 Student Management
+        </Typography>
+
+        <Stack direction="row" spacing={2}>
+          {navItems.map((item) => (
+            <Button
+              key={item.path}
+              component={Link}
+              to={item.path}
+              color={location.pathname === item.path ? "primary" : "inherit"}
+              sx={{ fontWeight: "bold" }}
+            >
+              {item.label}
+            </Button>
+          ))}
+        </Stack>
       </Toolbar>
     </AppBar>
   );
