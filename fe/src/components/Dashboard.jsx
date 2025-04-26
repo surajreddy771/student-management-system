@@ -36,12 +36,11 @@ function Dashboard() {
         <Grid item xs={12} sm={6} md={3}>
           <StatsCard title="Active Students" value={activeStudents} />
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+      </Grid>
+      <Grid item xs={12} sm={6} md={3}>
           {/* Render Department Table */}
           <DepartmentTable students={students} />
         </Grid>
-      </Grid>
-
       {/* Upcoming Passed Out Students */}
       <UpcomingPassedOut students={students} />
       {/* Upcoming Enrolled Students This Year */}
