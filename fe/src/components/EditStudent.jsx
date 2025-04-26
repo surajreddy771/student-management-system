@@ -50,7 +50,7 @@ function EditStudent() {
     axios.put(`${process.env.REACT_APP_API_BASE}/students/${id}`, form)
       .then(() => {
         toast.success('Student updated');
-        navigate('/students');
+       setTimeout(() => navigate('/students'), 2000);
       })
       .catch(() => toast.error('Error updating student'));
   };
