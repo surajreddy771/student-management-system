@@ -43,7 +43,7 @@ function AddStudent() {
     axios.post(`${process.env.REACT_APP_API_BASE}/students`, form)
       .then(() => {
         toast.success('Student added');
-        setTimeout(() => navigate('/students'), 2000);
+        setTimeout(() => navigate('/students'), 1000);
       })
       .catch(() => toast.error('Error adding student'));
   };
