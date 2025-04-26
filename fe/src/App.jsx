@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DashboardLayout from './components/layouts/DashboardLayout';
 import Dashboard from './components/Dashboard';
 import StudentList from './components/StudentList';
-import StudentForm from './components/StudentForm';
+import AddStudent from './components/AddStudent';
+import EditStudent from './components/EditStudent';
 
 function App() {
   return (
