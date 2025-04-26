@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
-import MKCard from "components/MKCard";
+import MKButton from "components/MKButton.jsx";
+import MKTypography from "components/MKTypography.jsx";
+import MKCard from "components/MKCard.jsx";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
