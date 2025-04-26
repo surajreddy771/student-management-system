@@ -12,13 +12,15 @@ function Dashboard() {
     isLoading: true,
   });
 
+  // Fetch statistics when the component mounts
   useEffect(() => {
     const fetchData = async () => {
       try {
         const totalRes = await axios.get(`${process.env.REACT_APP_API_BASE}/students`);
         const activeRes = await axios.get(`${process.env.REACT_APP_API_BASE}/students/active`);
         const departmentsRes = await axios.get(`${process.env.REACT_APP_API_BASE}/students/departments`);
-        
+
+        // Set the fetched statistics into state
         setStats({
           totalStudents: totalRes.data.length,
           activeStudents: activeRes.data.length,
@@ -33,6 +35,7 @@ function Dashboard() {
     fetchData();
   }, []);
 
+  // Render Pie chart for students by department
   const renderPieChart = (data) => {
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF4C4C'];
     return (
