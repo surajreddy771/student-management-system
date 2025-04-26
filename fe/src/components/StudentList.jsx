@@ -17,13 +17,15 @@ function StudentList() {
   }, []);
 
   const handleDelete = (id) => {
+  if (window.confirm('Are you sure you want to delete this student?')) {
     axios.delete(`${process.env.REACT_APP_API_BASE}/students/${id}`)
       .then(() => {
         setStudents(students.filter(s => s._id !== id));
         toast.success('Student deleted');
       })
       .catch(() => toast.error('Error deleting student'));
-  };
+  }
+};
 
   return (
     <div>
