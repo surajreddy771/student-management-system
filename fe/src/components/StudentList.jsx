@@ -17,15 +17,15 @@ function StudentList() {
   }, []);
 
   const handleDelete = (id) => {
-  if (window.confirm('Are you sure you want to delete this student?')) {
-    axios.delete(`${process.env.REACT_APP_API_BASE}/students/${id}`)
-      .then(() => {
-        setStudents(students.filter(s => s._id !== id));
-        toast.success('Student deleted');
-      })
-      .catch(() => toast.error('Error deleting student'));
-  }
-};
+    if (window.confirm('Are you sure you want to delete this student?')) {
+      axios.delete(`${process.env.REACT_APP_API_BASE}/students/${id}`)
+        .then(() => {
+          setStudents(students.filter(s => s._id !== id));
+          toast.success('Student deleted');
+        })
+        .catch(() => toast.error('Error deleting student'));
+    }
+  };
 
   return (
     <div>
@@ -34,16 +34,28 @@ function StudentList() {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
+            <TableCell>Student ID</TableCell>
+            <TableCell>First Name</TableCell>
+            <TableCell>Last Name</TableCell>
             <TableCell>Email</TableCell>
+            <TableCell>Date of Birth</TableCell>
+            <TableCell>Department</TableCell>
+            <TableCell>Enrollment Year</TableCell>
+            <TableCell>Active Status</TableCell>
             <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {students.map(student => (
             <TableRow key={student._id}>
-              <TableCell>{student.firstName} {student.lastName}</TableCell>
+              <TableCell>{student.studentId}</TableCell>
+              <TableCell>{student.firstName}</TableCell>
+              <TableCell>{student.lastName}</TableCell>
               <TableCell>{student.email}</TableCell>
+              <TableCell>{student.dob}</TableCell>
+              <TableCell>{student.department}</TableCell>
+              <TableCell>{student.enrollmentYear}</TableCell>
+              <TableCell>{student.isActive ? 'Active' : 'Inactive'}</TableCell>
               <TableCell>
                 <Stack direction="row" spacing={1}>
                   <Button component={Link} to={`/edit/${student._id}`} variant="outlined">Edit</Button>
